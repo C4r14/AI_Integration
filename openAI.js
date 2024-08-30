@@ -21,7 +21,7 @@ const getChatGPTResponse = async (requestMessage) => {
 
         if (run.status === 'completed') {
             let responseMessage = await getAssistantResponse(run.thread_id)
-            responseMessage = await processResponseMessage(responseMessage)
+            responseMessage = await removeSourceReferences(responseMessage)
             return responseMessage
         }
 
@@ -30,17 +30,6 @@ const getChatGPTResponse = async (requestMessage) => {
         console.error('Error:', error)
         throw error
     }
-}
-
-/**
- * Cleans up the assistant's response by removing any unnecessary references.
- * This just makes the response look better before showing it to the user.
- */
-const processResponseMessage = async (message) => {
-    if (typeof message === 'string') {
-        message = await removeSourceReferences(message)
-    }
-    return message
 }
 
 /**
