@@ -47,6 +47,7 @@ async function retrieveAssistant() {
         })
 
         const data = response.data
+        // console.log(data)
         return data
     } catch (error) {
         console.error('Error retrieving assistant:', error.response ? error.response.data : error.message)
